@@ -1,0 +1,94 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| db                 |
+| information_schema |
+| mysql              |
+| performance_schema |
+| root               |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.01 sec)
+
+mysql> create evaluation;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'evaluation' at line 1
+mysql> use db;
+Database changed
+mysql> create table emp(empId int, EmpName varchar(10), Department varchar(10), ContactNo int, EmailId varchar(30), EmpHeadId int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into emp values(101, "Isha", "E-101", 1234567890, "isha@gmail.com", 105);
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into emp values(102, "Priya", "E-104", 1234567890, "priya@yahoo.com", 103);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into emp values(103, "Neha", "E-101", 1234567890, "neha@gmail.com", 101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into emp values(104, "Rahul", "E-102", 1234567890, "rahul@yahoo.com", 105);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into emp values(105, "Abhishek", "E-101", 1234567890, "abhishek@gmail.com", 102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp;
++-------+----------+------------+------------+--------------------+-----------+
+| empId | EmpName  | Department | ContactNo  | EmailId            | EmpHeadId |
++-------+----------+------------+------------+--------------------+-----------+
+|   101 | Isha     | E-101      | 1234567890 | isha@gmail.com     |       105 |
+|   102 | Priya    | E-104      | 1234567890 | priya@yahoo.com    |       103 |
+|   103 | Neha     | E-101      | 1234567890 | neha@gmail.com     |       101 |
+|   104 | Rahul    | E-102      | 1234567890 | rahul@yahoo.com    |       105 |
+|   105 | Abhishek | E-101      | 1234567890 | abhishek@gmail.com |       102 |
++-------+----------+------------+------------+--------------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> create table empDept(DeptId varchar(10), DeptName varchar(20), Dept_off varchar(10), DeptHead int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into empDept values("E-101", "HR", "Monday", 105);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into empDept values("E-102", "Development", "Tuesday", 101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into empDept values("E-103", "House Keeping", "Saturday", 103);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>
+mysql> insert into empDept values("E-104", "Sales", "Sunday", 104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into empDept values("E-105", "Purchase", "Tuesday", 104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from empDept;
++--------+---------------+----------+----------+
+| DeptId | DeptName      | Dept_off | DeptHead |
++--------+---------------+----------+----------+
+| E-101  | HR            | Monday   |      105 |
+| E-102  | Development   | Tuesday  |      101 |
+| E-103  | House Keeping | Saturday |      103 |
+| E-104  | Sales         | Sunday   |      104 |
+| E-105  | Purchase      | Tuesday  |      104 |
++--------+---------------+----------+----------+
+5 rows in set (0.01 sec)
+
+mysql>

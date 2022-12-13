@@ -1,0 +1,458 @@
+function runProgram(input){
+	
+}
+
+if (process.env.USER === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
+
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+    }
+}
+
+// Working program using Reader Class
+import java.io.*;
+import java.util.*;
+  
+public class Main {
+    static class Reader {
+        final private int BUFFER_SIZE = 1 << 16;
+        private DataInputStream din;
+        private byte[] buffer;
+        private int bufferPointer, bytesRead;
+  
+        public Reader()
+        {
+            din = new DataInputStream(System.in);
+            buffer = new byte[BUFFER_SIZE];
+            bufferPointer = bytesRead = 0;
+        }
+  
+        public Reader(String file_name) throws IOException
+        {
+            din = new DataInputStream(
+                new FileInputStream(file_name));
+            buffer = new byte[BUFFER_SIZE];
+            bufferPointer = bytesRead = 0;
+        }
+  
+        public String readLine() throws IOException
+        {
+            byte[] buf = new byte[64]; // line length
+            int cnt = 0, c;
+            while ((c = read()) != -1) {
+                if (c == '\n') {
+                    if (cnt != 0) {
+                        break;
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                buf[cnt++] = (byte)c;
+            }
+            return new String(buf, 0, cnt);
+        }
+  
+        public int nextInt() throws IOException
+        {
+            int ret = 0;
+            byte c = read();
+            while (c <= ' ') {
+                c = read();
+            }
+            boolean neg = (c == '-');
+            if (neg)
+                c = read();
+            do {
+                ret = ret * 10 + c - '0';
+            } while ((c = read()) >= '0' && c <= '9');
+  
+            if (neg)
+                return -ret;
+            return ret;
+        }
+  
+        public long nextLong() throws IOException
+        {
+            long ret = 0;
+            byte c = read();
+            while (c <= ' ')
+                c = read();
+            boolean neg = (c == '-');
+            if (neg)
+                c = read();
+            do {
+                ret = ret * 10 + c - '0';
+            } while ((c = read()) >= '0' && c <= '9');
+            if (neg)
+                return -ret;
+            return ret;
+        }
+  
+        public double nextDouble() throws IOException
+        {
+            double ret = 0, div = 1;
+            byte c = read();
+            while (c <= ' ')
+                c = read();
+            boolean neg = (c == '-');
+            if (neg)
+                c = read();
+  
+            do {
+                ret = ret * 10 + c - '0';
+            } while ((c = read()) >= '0' && c <= '9');
+  
+            if (c == '.') {
+                while ((c = read()) >= '0' && c <= '9') {
+                    ret += (c - '0') / (div *= 10);
+                }
+            }
+  
+            if (neg)
+                return -ret;
+            return ret;
+        }
+  
+        private void fillBuffer() throws IOException
+        {
+            bytesRead = din.read(buffer, bufferPointer = 0,
+                                 BUFFER_SIZE);
+            if (bytesRead == -1)
+                buffer[0] = -1;
+        }
+  
+        private byte read() throws IOException
+        {
+            if (bufferPointer == bytesRead)
+                fillBuffer();
+            return buffer[bufferPointer++];
+        }
+  
+        public void close() throws IOException
+        {
+            if (din == null)
+                return;
+            din.close();
+        }
+    }
+  
+    public static void main(String[] args)
+        throws IOException
+    {
+        Reader s = new Reader();
+        int n = s.nextInt();
+        int k = s.nextInt();
+        int count = 0;
+        while (n-- > 0) {
+            int x = s.nextInt();
+            if (x % k == 0)
+                count++;
+        }
+        System.out.println(count);
+    }
+}
+
+import java.util.*;
+import java.io.*;
+class Main{
+    static class FastReader
+  {
+    BufferedReader br;
+    StringTokenizer st;
+    public FastReader()
+    {
+      br = new BufferedReader(new InputStreamReader(System.in));
+    }
+    String next()
+    {
+      while (st == null || !st.hasMoreElements()){
+        try { st = new StringTokenizer(br.readLine()); }
+        catch (IOException e) { e.printStackTrace(); }
+      }
+      return st.nextToken();
+    }
+    int nextInt() { return Integer.parseInt(next()); }
+    long nextLong() { return Long.parseLong(next()); }
+    double nextDouble(){ return Double.parseDouble(next()); }
+    String nextLine(){
+      String str = "";
+      try { str = br.readLine(); }
+      catch (IOException e) { e.printStackTrace(); }
+      return str;
+    }
+  }
+  public static void main(String[] args){
+     FastReader fs = new FastReader();
+  }
+}
+
+4220553919  WK8LV35716
+
+Geometric Progression
+G.P = 1+ 1/r + 1/r**2 + 1/r**3 + ....... + 1/r**n
+
+suppose r = 2, n = 4
+
+S = 1+ 1/2**1 + 1/2**2 + 1/2**3 + 1/2**4
+S = 1 + 1/2 + 1/4 + 1/8 + 1/ 16
+S = 1+ 0.5 + 0.25 + 0.125 + 0.0625
+S = 1.75 + 0.1875
+S = 1.9375
+
+
+// function runProgram(input){
+//     input= input.trim().split("\n")
+//     let tc = +input[0]
+//     let line = 1;
+    
+//     for(let i=0;i<tc;i++){
+//         let N = +input[line++]
+//         let arr = input[line++].trim().split(" ").map(Number) 
+//         let j = 0;
+//         let sum = 0;
+//         console.log(easy(arr, j, sum));
+//     }
+// }
+// function easy(arr, j, sum){
+   
+//   if(j>arr.length-1)
+//   {
+//       return 0
+//   }
+//   return arr[j]+ easy(arr,j+1,sum)     //6  + easy(arr,0+1)
+// }
+
+
+
+
+Hi, 
+
+I hope you are having a wonderful day.
+
+Thank you so much for letting me know about my low assignment submission. The reason is that I worked on my assignments daily, but 20-30% of work was left every day and with the next day's assignment, I priotirized them first and the remaining got piled up like this.
+
+I also had to share my laptop with my sibling these past couple of weeks, so that gave me less time and it got difficult for me to complete assignments on time.
+
+I will make some time from the team project this week to complete all pending work. I ensure I will try my best to be more proactive in submitting my assignments from here onwards.
+
+Thank you.
+
+Classes are a template for creating objects. They encapsulate data with code to work on that data. Classes in JS are built on prototypes but also have some syntax and semantics that are not shared with ES5 class-like semantics.
+
+
+I prefer to work under stressful or pressurized conditions because this is when I am at my best.
+
+I handle stress and pressure by focusing on the task at hand, remaining calm, and creating lists of what needs to be done and in what order. For example, during project week,  a team member had a family emergency and we needed a volunteer to carry out his work whilst he was absent. I agreed to be that person.
+
+To make sure I handled the stress that came with doing two jobs at once, I obtained a clear brief from teammates, I created a list of what needed to be done and by what timescale, and I focused intently on each task without any distractions.
+
+I also handle stress and pressure by making sure I keep myself fit and healthy. I eat well and I visit the gym three times a week. Doing these things enables me to maintain optimum concentration levels whilst at work.
+
+ let previous = head;
+    let current = head.next;
+    let forward = head.next.next;
+    
+    while(forward != null){
+        if(previous.data<current.data && current.data>forward.data){
+            previous= previous.next;
+            current = current.next;
+            forward= forward.next
+        }
+        
+        else if(previous.data>current.data && current.data<forward.data){
+            previous= previous.next;
+            current = current.next;
+            forward= forward.next
+        }
+        else{
+            return false;
+        }
+    }
+    if(!false){
+        return true
+    }
+
+things which went wrong
+how it should have done
+
+ 
+
+12Shrishtify
+
+
+https://github.com/9325388255/Unit-4-Java
+
+
+Books (Goodreads) - 
+Gang of four Design Patterns
+The mythical man month
+Give and Take - Adam Grant
+The communication book
+The Right Kind of Crazy: A True Story of Team
+
+Movies - 
+my cousin vinny
+silence of the lambs
+
+5:45 - Good morning girl
+	🥛
+	💩
+	🪥
+	👧🚰
+6:00 - WORK MODE ON
+JA-111 lecture video
+till 8:00
+8:00 - 8:15 => jhadu
+8:15 - 8:35 => pocha
+8:35 - 8:55 => aanghod
+9:00 - 9:15 => scrum
+9:15 - 9:30 => insta/whatsapp/twitter
+9:30 - 11:30 => DSA
+11:30 - 11:45 => Stretch/walk/🥛
+11:45 - 1:15 => CSBT
+1:20 - 1:40 => Lunch🥗
+1:40 - 2:00 => naptime💤
+2:02 - 2:30 => pre-class video💻
+2:30 - 5:15/30 => Java
+5:15/30 - 6:00 => Chhat
+6:00 - 7:00 => Record video
+7:00 - 8:00 => Interview prep
+8:00 - 9:00 => Stand-Up
+9:00 - 11:00 => Kitchen stuff/ dinner/ chhat
+11:00 - 12:30 => bedtime
+12:45 - 2:00/30 => Assignment
+2:00/30 => Good night
+
+
+
+Interview Readiness:-----
+============================
+Good Morning/Evening/:
+Firstly I would like to thank Yogesh Sir Payoshni mam and Tanya mam for giving me this opportunity to speak on this questions which is part of our Interview Readiness and given in our MAC101. So now coming to the question which is about my strength and weaknesses so my strength is honesty, dedication and hardworking towards my every work and I give attention to every single detail and try not to mess it up and these traits of mine would definitely help in company's growth and talking about my weaknesses then I am scared of taking big risks which may harm company so this was all about my strength and weaknesses. 
+My drive to implement assigned tasks perfectly sometimes also leads to delays in assigned projects.
+I've always preferred to work in groups and find that my collaborative nature is one of my strongest attributes.
+
+
+Introduction:-
+================
+
+My name is Shrishti Prasad and I am from Nagpur,Maharashtra. I completed my Biotech from Nagpur University in 2021.I completed my 12th from Tidke Junior College in 2018 and 10th from The CDS School also from Nagpur in 2015.Currently I am pursuing Full stack web development course from Masai School and specialising in Java Backend
+Developer and My Hobbies includes watching webseries, reading books and I also love cooking.That was all about myself.
+
+
+
+OOPS concept with real life example:-
+=========================================
+
+Firstly I would like to thank............................................................
+
+So now coming to OOPS concept so the full form of OOPS is Object Orriented Programming.
+Mainly OOPS concept relies on four pillars i.e.
+1.Inheritance
+2.Encapsulation
+3.Polymorphism
+4.Abstraction
+
+So I would like to explain Inheritance which is the heart of OOPS concept.So now I will share my screen
+and show what Inheritance is:--
+
+
+A.java:-
+=========
+public class A {       //Here Class A is Super class/base class
+	
+       int i=10;
+	
+	void funA() {
+		
+		System.out.println("inside funA of A");
+	}
+
+}
+
+
+
+Demo.java:-
+=============
+public class Demo extends A {       //here demo class is child class
+
+		int x=100;
+		
+		void funX() {
+			
+			System.out.println("inside funX of Demo");
+		}
+		
+
+		public static void main(String[] args) {
+				
+			Demo d1 = new Demo();
+			
+			System.out.println(d1.x);
+			d1.funX();
+			
+			System.out.println(d1.i);
+			d1.funA();
+			
+		}
+
+		
+		
+}
+
+
+Notion password - Shri12notion, shrishtiprasad12@gmail.com
+
+
+
+var arr = [2,4,6,8];
+var n  = arr.length;
+var m = 6;
+var dp[n+1][m+1] = -1;
+
+console.log(Top(arr,m,n,dp));
+
+function Top(arr,m,n,dp){
+  if(m==0) return true;
+  if(n == 0) return false;
+  if(dp[n][m] !== -1) return dp[n][m];
+  
+  if(arr[n-1]<=m){
+    return dp[n][m] = (Top(arr,m-arr[n-1],n-1,dp) || Top(arr,m,n-1,dp))
+  }else{
+    return dp[n][m] = Top(arr,m,n-1,dp)
+  }
+}
+
+9355200021
+
+I have been facing issues in understanding concepts and then implementing the same. This has been stressing me out and thus I'm not able to work toward mending this. I find it difficult to ask for help but I'm working towards it and will book pp sessions to clear my doubts. Last week has been heavy for me mentally, but now I feel better and will put in more hours to complete assignments. I sincerely hope the given reasons will be considered. P.S. I have been attending lectures regularly. My attendance is not low.
+
+
+
+
+
+
+

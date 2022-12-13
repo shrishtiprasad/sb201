@@ -1,0 +1,405 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| root               |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> create database db;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| db                 |
+| information_schema |
+| mysql              |
+| performance_schema |
+| root               |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql>
+mysql> use db;
+Database changed
+mysql> create table Persons(fname varchar(25), int age);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int age)' at line 1
+mysql> create table Persons(fname varchar(25), age int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc Persons;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| fname | varchar(25) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql> insert into Persons values("Pablo", 21);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from Persons;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   21 |
++-------+------+
+1 row in set (0.01 sec)
+
+mysql> select * from Persons;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   21 |
++-------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into Persons values("Ved", 29);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  select * from Persons;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   21 |
+| Ved   |   29 |
++-------+------+
+2 rows in set (0.00 sec)
+
+mysql>  insert into Persons values("Ved", 29);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Persons;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   21 |
+| Ved   |   29 |
+| Ved   |   29 |
++-------+------+
+3 rows in set (0.00 sec)
+
+mysql> select fname from Persons;
++-------+
+| fname |
++-------+
+| Pablo |
+| Ved   |
+| Ved   |
++-------+
+3 rows in set (0.00 sec)
+
+mysql> select DISTINCT fname from Persons;
++-------+
+| fname |
++-------+
+| Pablo |
+| Ved   |
++-------+
+2 rows in set (0.01 sec)
+
+mysql> select count(*) from Persons;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select * from Persons where fname = "Ved";
++-------+------+
+| fname | age  |
++-------+------+
+| Ved   |   29 |
+| Ved   |   29 |
++-------+------+
+2 rows in set (0.01 sec)
+
+mysql> select count(*) from Persons;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> insert into Persons values ("", 0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Persons values ("one", 1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Persons values ("two", 2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Persons values ("three", 3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Persons values ("four", 4);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Persons;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   21 |
+| Ved   |   29 |
+| Ved   |   29 |
+|       |    0 |
+| one   |    1 |
+| two   |    2 |
+| three |    3 |
+| four  |    4 |
++-------+------+
+8 rows in set (0.00 sec)
+
+mysql> select * from Persons where age > 4;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   21 |
+| Ved   |   29 |
+| Ved   |   29 |
++-------+------+
+3 rows in set (0.01 sec)
+
+mysql> select * from Persons where age > 4 and age < 22;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   21 |
++-------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from Persons where age=2 or age=29;
++-------+------+
+| fname | age  |
++-------+------+
+| Ved   |   29 |
+| Ved   |   29 |
+| two   |    2 |
++-------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Persons where not fname = "Ved";
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   21 |
+|       |    0 |
+| one   |    1 |
+| two   |    2 |
+| three |    3 |
+| four  |    4 |
++-------+------+
+6 rows in set (0.01 sec)
+
+mysql> select * from Persons order by age;
++-------+------+
+| fname | age  |
++-------+------+
+|       |    0 |
+| one   |    1 |
+| two   |    2 |
+| three |    3 |
+| four  |    4 |
+| Pablo |   21 |
+| Ved   |   29 |
+| Ved   |   29 |
++-------+------+
+8 rows in set (0.00 sec)
+
+mysql> select * from Persons order by age by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by desc' at line 1
+mysql> select * from Persons order by age desc;
++-------+------+
+| fname | age  |
++-------+------+
+| Ved   |   29 |
+| Ved   |   29 |
+| Pablo |   21 |
+| four  |    4 |
+| three |    3 |
+| two   |    2 |
+| one   |    1 |
+|       |    0 |
++-------+------+
+8 rows in set (0.00 sec)
+
+mysql> select * from Persons order by fname;
++-------+------+
+| fname | age  |
++-------+------+
+|       |    0 |
+| four  |    4 |
+| one   |    1 |
+| Pablo |   21 |
+| three |    3 |
+| two   |    2 |
+| Ved   |   29 |
+| Ved   |   29 |
++-------+------+
+8 rows in set (0.00 sec)
+
+mysql> insert into Persons values (null, 0
+    -> insert into Persons values (null, 0);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into Persons values (null, 0)' at line 2
+mysql> insert into Persons values (null, 0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Persons values
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values' at line 1
+mysql> select * from Persons fname is null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'is null' at line 1
+mysql> select * from Persons where fname is null;
++-------+------+
+| fname | age  |
++-------+------+
+| NULL  |    0 |
++-------+------+
+1 row in set (0.01 sec)
+
+mysql> update Persons set age = 50 where fname = "Pablo";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Persons;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   50 |
+| Ved   |   29 |
+| Ved   |   29 |
+|       |    0 |
+| one   |    1 |
+| two   |    2 |
+| three |    3 |
+| four  |    4 |
+| NULL  |    0 |
++-------+------+
+9 rows in set (0.00 sec)
+
+mysql> delete from Persons where fname = "four";
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Persons;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   50 |
+| Ved   |   29 |
+| Ved   |   29 |
+|       |    0 |
+| one   |    1 |
+| two   |    2 |
+| three |    3 |
+| NULL  |    0 |
++-------+------+
+8 rows in set (0.01 sec)
+
+mysql> select * from Persons limit 3;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   50 |
+| Ved   |   29 |
+| Ved   |   29 |
++-------+------+
+3 rows in set (0.00 sec)
+
+mysql> select max(age) from Persons;
++----------+
+| max(age) |
++----------+
+|       50 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select min(age) from Persons;
++----------+
+| min(age) |
++----------+
+|        0 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select avg(age) from Persons;
++----------+
+| avg(age) |
++----------+
+|  14.2500 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select sum(age) from Persons;
++----------+
+| sum(age) |
++----------+
+|      114 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from Persons order by age desc limit 1;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   50 |
++-------+------+
+1 row in set (0.01 sec)
+
+mysql> select * from Persons order by age desc limit 3;
++-------+------+
+| fname | age  |
++-------+------+
+| Pablo |   50 |
+| Ved   |   29 |
+| Ved   |   29 |
++-------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Persons where fname like 'Ve%';
++-------+------+
+| fname | age  |
++-------+------+
+| Ved   |   29 |
+| Ved   |   29 |
++-------+------+
+2 rows in set (0.01 sec)
+
+mysql>  select * from Persons where fname like 'o_e;
+    '> select * from Persons where fname like 'o_e';
+    '>  select * from Persons where fname like 'Ve%';
+    '>
+    '>
+    '>
+    '> select * from Persons order by age desc limit 3;
+    '> select *;
+    '> select * from Persons where fname like 'o_e';
+    '>

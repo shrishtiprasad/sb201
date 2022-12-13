@@ -1,0 +1,7 @@
+Q5/ What do you mean by Webservices, Explain the similarities and differences between a Web application and Webservices.
+
+A Web Service is can be defined by following ways:
+1. It is a client-server application or application component for communication.
+2. The method of communication between two devices over the network.
+3. It is a software system for the interoperable machine to machine communication.
+4. It is a collection of standards or protocols for exchanging information between two devices or application.

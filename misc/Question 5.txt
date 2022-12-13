@@ -1,0 +1,10 @@
+Explain different types of Normalisation forms in a DBMS with an Example Table.
+
+	There are 6 different types of Normalisation forms.
+		
+		1. 1NF
+		2. 2NF
+		3. 3NF
+		4. BCNF
+		5. 4NF
+		6. 5NF

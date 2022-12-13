@@ -1,0 +1,162 @@
+
+mysql> create database busticket;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use busticket;
+Database changed
+mysql> create table Administrator
+    -> (
+    -> Aid int primary key ,
+    -> Ausername varchar(40),
+    -> Apassword varchar(10)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into Administrator values(1,'Anusha','1111');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Administrator values(2,'Sakshi','2222');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Administrator values(3,'Shrishti','3333');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from administrator;
++-----+-----------+-----------+
+| Aid | Ausername | Apassword |
++-----+-----------+-----------+
+|   1 | Anusha    | 1111      |
+|   2 | Sakshi    | 2222      |
+|   3 | Shrishti  | 3333      |
++-----+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> create table user
+    -> (
+    -> Uid int primary key ,
+    -> Uusername varchar(40),
+    -> Upassword varchar(10)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into user values(1,'Ron','0000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create table Businfo
+    -> (
+    -> BNumber int primary key ,
+    -> BName varchar(30),
+    -> BRoute varchar(50),
+    -> BType varchar(8),
+    -> AvailSeats int ,
+    -> departureTime Datetime,
+    -> Arrival_Time Datetime ,
+    -> contact varchar(10)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into Businfo values(2626,'Anusha Travels','via pune by pass','AC',15,'2022-11-03 20:00','2022-11-04 10:00','9752195035');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Businfo values(2627,'Sakshi Travels','via Bhopal','NONAC',25,'2022-11-04 19:00','2022-11-05 11:00','6235382365');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Businfo values(2628,'Shrishti Travels','via Kanpur','AC',20,'2022-11-05 18:00','2022-11-06 08:30','7536656366');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from businfo;
++---------+------------------+------------------+-------+------------+---------------------+---------------------+------------+
+| BNumber | BName            | BRoute           | BType | AvailSeats | departureTime       | Arrival_Time        | contact    |
++---------+------------------+------------------+-------+------------+---------------------+---------------------+------------+
+|    2626 | Anusha Travels   | via pune by pass | AC    |         15 | 2022-11-03 20:00:00 | 2022-11-04 10:00:00 | 9752195035 |
+|    2627 | Sakshi Travels   | via Bhopal       | NONAC |         25 | 2022-11-04 19:00:00 | 2022-11-05 11:00:00 | 6235382365 |
+|    2628 | Shrishti Travels | via Kanpur       | AC    |         20 | 2022-11-05 18:00:00 | 2022-11-06 08:30:00 | 7536656366 |
++---------+------------------+------------------+-------+------------+---------------------+---------------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create table fare
+    -> (
+    -> Bnumber int primary key,
+    -> source varchar(30),
+    -> destination varchar(30),
+    -> fare int ,
+    -> foreign key (Bnumber) references Businfo(BNumber)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into fare values(2626,'mumbai','pune',2000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into fare values(2627,'balaghat','indore',2000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into fare values(2628,'delhi','Allahabad',2000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from fare;
++---------+----------+-------------+------+
+| Bnumber | source   | destination | fare |
++---------+----------+-------------+------+
+|    2626 | mumbai   | pune        | 2000 |
+|    2627 | balaghat | indore      | 2000 |
+|    2628 | delhi    | Allahabad   | 2000 |
++---------+----------+-------------+------+
+3 rows in set (0.00 sec)
+
+mysql> create table adminBus
+    -> (
+    -> Aid int ,
+    -> busNo int,
+    -> foreign key(aid) references administrator(aid),
+    -> foreign key(busno) references businfo(bnumber)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into adminBus values(1,2626);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into adminBus values(2,2627);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into adminBus values(3,2628);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from adminbus;
++------+-------+
+| Aid  | busNo |
++------+-------+
+|    1 |  2626 |
+|    2 |  2627 |
+|    3 |  2628 |
++------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table BookTicket
+    -> (
+    -> BNumber int primary key,
+    -> BName varchar(30),
+    -> passName varchar(30),
+    -> Age int ,
+    -> sex varchar(8),
+    -> NoOfbookedSeat int,
+    -> source varchar(30),
+    -> destination varchar(30),
+    -> tdate date
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into BookTicket values(2626,'Anusha travels','Anusha',23,'male',10,'balaghat','indore','2022-10-11');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from bookticket;
++---------+----------------+----------+------+------+----------------+----------+-------------+------------+
+| BNumber | BName          | passName | Age  | sex  | NoOfbookedSeat | source   | destination | tdate      |
++---------+----------------+----------+------+------+----------------+----------+-------------+------------+
+|    2626 | Anusha travels | Anusha   |   23 | male |
+10 | balaghat | indore      | 2022-10-11 |
++---------+----------------+----------+------+------+----------------+----------+-------------+------------+
+1 row in set (0.00 sec)
+
+mysql> update Businfo set AvailSeats=22 where BNumber = 2626;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0

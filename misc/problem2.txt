@@ -1,0 +1,67 @@
+What do you mean by the IOC?
+
+	The IOC is Inversion Of Control. Inversion Of Cintrol transfers the control of objects or portions of a program
+	to a container or framework. It instantiates objects. The IOC container gets info from the XML file. 
+
+	The main tasks executed by IOC are:
+		1. to instantiate application class
+		2. to assemble the dependencies between objects
+		3. configure the object
+
+	The IOC is a conceptual design principle, in which an external entity provides
+	the dependencies to the application components instead of hard coding them in the
+	component class.
+	
+	There are two types of containers:
+		1. BeanFactory
+		2. ApplicationContext
+
+	ApplicationContext is the child interface of the BeanFactory interface.
+	BeanFactory is the basic container with some basic functionalities whereas ApplicationContext is an advanced container,
+	with enhanced functionalities.
+
+
+What is Dependency Injection?
+
+	Dependency Injection is a design pattern. It is a functionality provided by Spring IOC.
+	It removes the dependency from the programming code so that it can be easy to manage.
+	Dependency Injection makes programming code loosely coupled. 
+
+	There are two types:
+		1. Setter Dependency Injection
+		2. Constructor Dependency Injection
+
+
+Explain the life cycle of the Spring Bean.
+
+	Ordinary java class constructor and finalize() methods can be considered life cycle methods.  These methods will be 
+	called automatically by the JVM, the Spring container will control the life cycle of a spring bean, i.e. from instantiation to destruction.
+	Spring bean class is a POJO class, it need not implements any spring f/w API-specific interface or extend any class to facilitate the 
+	spring container to control the life cycle of a spring bean. i.e. for spring beans, the component contract is not required.
+
+	Life-cycle of a spring bean has 5 stages:
+		1. Does not exist
+		2. Instantiated
+		3. Initialized
+		4. Service
+		5. Destroy
+
+	1. Does not exist phase:
+		Initially, a spring bean object does not exist, if the bean object is in a singleton scope then the bean is instantiated by the 
+		container at the time of loading the XML file. If the scope is a prototype, it is instantiated at the time of pulling the 
+		object/utilizing that object. (i.e. at the time of calling the getBean() method).
+
+	2. Instantiation phase:
+		The Spring container loads the spring bean class into the memory and creates the bean class object. After that then bean 
+		a class object is created, the spring container uses DI to populate the bean fields (properties/variables).
+		All the dependencies will be resolved for a spring bean before its instantiation is finished.
+
+	3. Initialization phase:
+		If inside the spring bean class any user-defined init-method is configured, the spring container will call that method.
+
+	4. Service phase / Ready to use phase:
+		Here spring container provides the bean object reference to the caller, then the caller can call its business method on that bean object.
+
+	5. Destruction phase:
+		Upon the container shutdown (when we call the close() method on the container class ) spring container will call user-defined destroy()
+		method if it is configured, just before the bean instance is garbage collected.
